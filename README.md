@@ -1,5 +1,10 @@
 # Trackpad Swipe Navigation
 
+> [!WARNING]
+> **Alpha version for my personal use.** This plugin is not in the list of
+> Obsidian community plugins. It can change or stop working at any time.
+> Use it at your own risk.
+
 An Obsidian plugin for macOS. A two-finger horizontal swipe on the trackpad
 goes back or forward, the same as in Safari.
 
@@ -38,8 +43,7 @@ The plugin uses the Obsidian commands "Navigate back" and "Navigate forward".
 3. Type `sergivalverde/obsidian-trackpad-swipe-nav`.
 4. Turn on **Trackpad Swipe Navigation** in **Settings → Community plugins**.
 
-This repository is private. Thus BRAT needs a GitHub token with read access to
-it. Put the token in the BRAT settings.
+BRAT installs the latest release. All releases are alpha versions.
 
 ### By hand
 
@@ -88,6 +92,7 @@ in a note and in the web viewer.
 
 1. Run `npm test`.
 2. Increase `version` in `manifest.json` and `package.json`, and add the
-   version to `versions.json`.
-3. Make a GitHub release. The tag is the version, without `v` (for example `1.0.1`).
+   version to `versions.json`. Keep the `-alpha` suffix while the plugin is
+   for personal use.
+3. Make a GitHub release. The tag is the version, without `v` (for example `0.1.0-alpha`).
 4. Attach `main.js` and `manifest.json` to the release.
