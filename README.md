@@ -59,8 +59,35 @@ the top of `makeDetector` in `main.js`:
 | `THRESHOLD_PX` | 120 | The minimum horizontal movement for a swipe |
 | `DOMINANCE` | 2 | How much larger the horizontal movement must be than the vertical movement |
 
+## Tests
+
+The tests use the Node.js test runner and need no packages. Use Node.js 18
+or later.
+
+```sh
+npm test
+```
+
+The tests give the swipe detector a fake clock and fake scroll events. They
+check these items:
+
+- The swipe direction: a swipe to the right goes back.
+- One long swipe moves one page only, also with the scroll events after the swipe.
+- A gap of more than 250 ms starts a new swipe.
+- The minimum movement of 120 px, and the horizontal-to-vertical ratio.
+- A pinch to zoom does nothing.
+- Elements that can scroll horizontally scroll before a page moves.
+- The web viewer script sends one message for each swipe, also when Obsidian
+  adds it two times.
+- The plugin runs the correct Obsidian commands.
+
+The tests do not use Obsidian or a real trackpad. After a change, try a swipe
+in a note and in the web viewer.
+
 ## Release
 
-1. Increase `version` in `manifest.json`, and add the version to `versions.json`.
-2. Make a GitHub release. The tag is the version, without `v` (for example `1.0.1`).
-3. Attach `main.js` and `manifest.json` to the release.
+1. Run `npm test`.
+2. Increase `version` in `manifest.json` and `package.json`, and add the
+   version to `versions.json`.
+3. Make a GitHub release. The tag is the version, without `v` (for example `1.0.1`).
+4. Attach `main.js` and `manifest.json` to the release.

@@ -7,7 +7,8 @@ const MARK = "__trackpad_swipe_nav__:";
 // because wheel events over a web page do not reach Obsidian's document.
 // One swipe = a run of wheel events with gaps shorter than 250 ms.
 // It fires at most once per swipe, so the macOS momentum tail does not fire again.
-function makeDetector(fire) {
+// `now` is the clock. Tests give a fake clock.
+function makeDetector(fire, now = Date.now) {
   const GESTURE_GAP_MS = 250;
   const THRESHOLD_PX = 120;
   const DOMINANCE = 2;
@@ -27,9 +28,9 @@ function makeDetector(fire) {
   }
 
   return function onWheel(e) {
-    const now = Date.now();
-    if (now - last > GESTURE_GAP_MS) { dx = 0; dy = 0; done = false; }
-    last = now;
+    const t = now();
+    if (t - last > GESTURE_GAP_MS) { dx = 0; dy = 0; done = false; }
+    last = t;
     if (e.ctrlKey || done) return;
 
     // A swipe that starts inside a wide table, code block or page scrolls it instead.
@@ -52,7 +53,7 @@ const GUEST_SCRIPT = `(() => {
   window.addEventListener("wheel", onWheel, { passive: true, capture: true });
 })();`;
 
-module.exports = class TrackpadSwipeNav extends Plugin {
+class TrackpadSwipeNav extends Plugin {
   onload() {
     this.hooked = new WeakSet();
     this.registerDomEvent(document, "wheel", makeDetector((dir) => this.go(dir)), { passive: true });
@@ -90,4 +91,8 @@ module.exports = class TrackpadSwipeNav extends Plugin {
       inject();
     }
   }
-};
+}
+
+module.exports = TrackpadSwipeNav;
+module.exports.makeDetector = makeDetector;
+module.exports.GUEST_SCRIPT = GUEST_SCRIPT;

@@ -1,0 +1,9 @@
+{
+  "name": "obsidian-trackpad-swipe-nav",
+  "version": "1.0.1",
+  "private": true,
+  "description": "Obsidian plugin: two-finger trackpad swipe goes back or forward, like Safari.",
+  "scripts": {
+    "test": "node --test"
+  }
+}
