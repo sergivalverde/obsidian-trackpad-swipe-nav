@@ -1,0 +1,10 @@
+{
+  "id": "trackpad-swipe-nav",
+  "name": "Trackpad Swipe Navigation",
+  "version": "1.0.0",
+  "minAppVersion": "1.5.0",
+  "description": "Two-finger horizontal trackpad swipe goes back or forward, like Safari.",
+  "author": "Sergi Valverde",
+  "authorUrl": "https://github.com/sergivalverde",
+  "isDesktopOnly": true
+}
